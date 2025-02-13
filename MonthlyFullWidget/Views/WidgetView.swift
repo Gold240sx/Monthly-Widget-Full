@@ -9,12 +9,14 @@ import WidgetKit
 import SwiftUI
 
 struct MonthlyFullWidgetEntryView : View {
+    @Environment(\.showsWidgetContainerBackground) var showsBackground
+    @Environment(\.widgetRenderingMode) var renderingMode // changes to UI if nightmode doesn't look quite right.
     var entry: Provider.Entry
-    var config: MonthConfig
+    var config: MonthlyConfig
     
     init(entry: Provider.Entry) {
         self.entry = entry
-        self.config = MonthConfig.determineConfig(from: entry.date)
+        self.config = MonthlyConfig.determineConfig(from: entry.date)
     }
     
     var body: some View {
@@ -27,13 +29,13 @@ struct MonthlyFullWidgetEntryView : View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .minimumScaleFactor(0.6)
-                    .foregroundColor(config.weekdayTextColor)
+                    .foregroundStyle(showsBackground ? config.weekdayTextColor : .white)
                 Spacer()
             }
             
             Text(entry.date.dayDisplayFormat)
                 .font(.system(size: 70, weight: .bold))
-                .foregroundColor(config.dayTextColor)
+                .foregroundStyle(showsBackground ? config.dayTextColor : .white)
         }
         .padding(.vertical, 8)
         .containerBackground(config.backgroundColor.gradient, for: .widget)

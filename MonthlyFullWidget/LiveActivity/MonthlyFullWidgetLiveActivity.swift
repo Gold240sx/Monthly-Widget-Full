@@ -8,11 +8,12 @@
 import ActivityKit
 import WidgetKit
 import SwiftUI
+import Foundation
 
 struct MonthlyFullWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var emoji: String
+        var date: Date
     }
 
     // Fixed non-changing properties about your activity go here!
@@ -23,32 +24,73 @@ struct MonthlyFullWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MonthlyFullWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
+            let entry = DayEntry(date: context.state.date)
+            let config = MonthlyConfig.determineConfig(from: context.state.date)
+            
+            VStack(spacing: 12) {
+                HStack(spacing: 4) {
+                    Spacer()
+                    Text(config.emojiText)
+                        .font(.title2)
+                    Text(entry.date.weekdayDisplayFormat)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .minimumScaleFactor(0.6)
+                        .foregroundColor(config.weekdayTextColor)
+                    Spacer()
+                }
+                
+                Text(entry.date.dayDisplayFormat)
+                    .font(.system(size: 70, weight: .bold))
+                    .foregroundColor(config.dayTextColor)
             }
-            .activityBackgroundTint(Color.cyan)
+            .padding(.vertical, 8)
+            .background(config.backgroundColor) // have to use background instead of containerBackground
+            .activityBackgroundTint(Color.clear)
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
+                // Expanded UI goes here
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    let entry = DayEntry(date: context.state.date)
+                    let config = MonthlyConfig.determineConfig(from: context.state.date)
+                    
+                    VStack(spacing: 12) {
+                        HStack(spacing: 4) {
+                            Text(config.emojiText)
+                                .font(.title2)
+                            Text(entry.date.weekdayDisplayFormat)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .minimumScaleFactor(0.6)
+                                .foregroundColor(config.weekdayTextColor)
+                        }
+                        Text(entry.date.dayDisplayFormat)
+                            .font(.system(size: 40, weight: .bold))
+                            .foregroundColor(config.dayTextColor)
+                    }
+                    .padding(.vertical, 4)
+                    .background(config.backgroundColor)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    let entry = DayEntry(date: context.state.date)
+                    let config = MonthlyConfig.determineConfig(from: context.state.date)
+                    Text(entry.date.dayDisplayFormat)
+                        .foregroundColor(config.dayTextColor)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                    let entry = DayEntry(date: context.state.date)
+                    let config = MonthlyConfig.determineConfig(from: context.state.date)
+                    Text(entry.date.weekdayDisplayFormat)
+                        .foregroundColor(config.weekdayTextColor)
                 }
             } compactLeading: {
-                Text("L")
+                Text(context.state.date.dayDisplayFormat)
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text(context.state.date.weekdayDisplayFormat)
             } minimal: {
-                Text(context.state.emoji)
+                Text(context.state.date.dayDisplayFormat)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -58,23 +100,25 @@ struct MonthlyFullWidgetLiveActivity: Widget {
 
 extension MonthlyFullWidgetAttributes {
     fileprivate static var preview: MonthlyFullWidgetAttributes {
-        MonthlyFullWidgetAttributes(name: "World")
+        MonthlyFullWidgetAttributes(name: "Monthly Widget")
     }
 }
 
 extension MonthlyFullWidgetAttributes.ContentState {
-    fileprivate static var smiley: MonthlyFullWidgetAttributes.ContentState {
-        MonthlyFullWidgetAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: MonthlyFullWidgetAttributes.ContentState {
-         MonthlyFullWidgetAttributes.ContentState(emoji: "🤩")
-     }
+    fileprivate static var currentMonth: MonthlyFullWidgetAttributes.ContentState {
+        MonthlyFullWidgetAttributes.ContentState(date: .now)
+    }
+    
+    fileprivate static var april: MonthlyFullWidgetAttributes.ContentState {
+        MonthlyFullWidgetAttributes.ContentState(
+            date: Date.dateToDisplay(month: 4, day: 18)
+        )
+    }
 }
 
 #Preview("Notification", as: .content, using: MonthlyFullWidgetAttributes.preview) {
    MonthlyFullWidgetLiveActivity()
 } contentStates: {
-    MonthlyFullWidgetAttributes.ContentState.smiley
-    MonthlyFullWidgetAttributes.ContentState.starEyes
+    MonthlyFullWidgetAttributes.ContentState.currentMonth
+    MonthlyFullWidgetAttributes.ContentState.april
 }

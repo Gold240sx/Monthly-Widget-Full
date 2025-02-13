@@ -30,5 +30,5 @@ struct MonthlyFullWidget: Widget {
     MonthlyFullWidget()
 } timeline: {
     DayEntry(date: .now)
-    DayEntry(date: Date.dateToDisplay(month: 12, day: 22))
+    DayEntry(date: Date.dateToDisplay(month: 4, day: 18))
 }
