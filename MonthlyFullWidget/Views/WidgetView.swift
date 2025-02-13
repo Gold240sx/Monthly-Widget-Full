@@ -32,10 +32,15 @@ struct MonthlyFullWidgetEntryView : View {
                     .foregroundStyle(showsBackground ? config.weekdayTextColor : .white)
                 Spacer()
             }
+            .id(entry.date)
+            // Transition animations
+            .transition(.push(from: .trailing))
+            .animation(.bouncy, value: entry.date)
             
             Text(entry.date.dayDisplayFormat)
                 .font(.system(size: 70, weight: .bold))
                 .foregroundStyle(showsBackground ? config.dayTextColor : .white)
+                .contentTransition(.numericText())
         }
         .padding(.vertical, 8)
         .containerBackground(config.backgroundColor.gradient, for: .widget)

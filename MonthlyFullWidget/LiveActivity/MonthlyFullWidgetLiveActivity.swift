@@ -119,6 +119,47 @@ extension MonthlyFullWidgetAttributes.ContentState {
 #Preview("Notification", as: .content, using: MonthlyFullWidgetAttributes.preview) {
    MonthlyFullWidgetLiveActivity()
 } contentStates: {
-    MonthlyFullWidgetAttributes.ContentState.currentMonth
-    MonthlyFullWidgetAttributes.ContentState.april
+    MockData.dayOne
+    MockData.dayTwo
+    MockData.dayThree
+    MockData.dayFour
+    MockData.dayFive
+}
+
+#Preview("Live Activity", as: .content, using: MonthlyFullWidgetAttributes.preview) {
+   MonthlyFullWidgetLiveActivity()
+} contentStates: {
+    MockData.dayOne
+    MockData.dayTwo
+    MockData.dayThree
+    MockData.dayFour
+    MockData.dayFive
+}
+
+#Preview("Lock Screen", as: .content, using: MonthlyFullWidgetAttributes.preview) {
+   MonthlyFullWidgetLiveActivity()
+} contentStates: {
+    MockData.dayOne
+    MockData.dayTwo
+    MockData.dayThree
+    MockData.dayFour
+    MockData.dayFive
+}
+
+#Preview("Dynamic Island Compact", as: .dynamicIsland(.compact), using: MonthlyFullWidgetAttributes.preview) {
+   MonthlyFullWidgetLiveActivity()
+} contentStates: {
+    MockData.dayOne
+}
+
+#Preview("Dynamic Island Expanded", as: .dynamicIsland(.expanded), using: MonthlyFullWidgetAttributes.preview) {
+   MonthlyFullWidgetLiveActivity()
+} contentStates: {
+    MockData.dayOne
+}
+
+#Preview("Dynamic Island Minimal", as: .dynamicIsland(.minimal), using: MonthlyFullWidgetAttributes.preview) {
+   MonthlyFullWidgetLiveActivity()
+} contentStates: {
+    MockData.dayOne
 }

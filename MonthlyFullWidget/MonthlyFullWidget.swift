@@ -22,13 +22,18 @@ struct MonthlyFullWidget: Widget {
         }
         .configurationDisplayName("Monthly Style Widget")
         .description("The theme of the widget changes based on the month.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
+        .supportedFamilies([.systemSmall])
+        // if you only want it to show lockscreen or homescreen use the following:
+        // .disfavoredLocations([.lockScreen / .standby], for: [.systemSmall])
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview("Monthly Widget", as: .systemSmall) {
     MonthlyFullWidget()
 } timeline: {
-    DayEntry(date: .now)
-    DayEntry(date: Date.dateToDisplay(month: 4, day: 18))
+    DayEntry(date: MockData.dayOne.date)
+    DayEntry(date: MockData.dayTwo.date)
+    DayEntry(date: MockData.dayThree.date)
+    DayEntry(date: MockData.dayFour.date)
+    DayEntry(date: MockData.dayFive.date)
 }
