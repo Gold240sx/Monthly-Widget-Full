@@ -32,6 +32,8 @@ struct MonthlyFullWidgetLiveActivity: Widget {
                     Spacer()
                     Text(config.emojiText)
                         .font(.title2)
+                        .compositingGroup()
+                        .widgetAccentable()
                     Text(entry.date.weekdayDisplayFormat)
                         .font(.title3)
                         .fontWeight(.semibold)
@@ -60,6 +62,8 @@ struct MonthlyFullWidgetLiveActivity: Widget {
                         HStack(spacing: 4) {
                             Text(config.emojiText)
                                 .font(.title2)
+                                    .compositingGroup()
+                                    .widgetAccentable()
                             Text(entry.date.weekdayDisplayFormat)
                                 .font(.title3)
                                 .fontWeight(.semibold)

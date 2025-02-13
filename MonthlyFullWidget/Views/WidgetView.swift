@@ -25,6 +25,9 @@ struct MonthlyFullWidgetEntryView : View {
                 Spacer()
                 Text(config.emojiText)
                     .font(.title2)
+                    // Begin accent color emoji override
+                    .widgetAccentable()
+                    // End accent color emoji override
                 Text(entry.date.weekdayDisplayFormat)
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -41,6 +44,7 @@ struct MonthlyFullWidgetEntryView : View {
                 .font(.system(size: 70, weight: .bold))
                 .foregroundStyle(showsBackground ? config.dayTextColor : .white)
                 .contentTransition(.numericText())
+                .widgetAccentable()
         }
         .padding(.vertical, 8)
         .containerBackground(config.backgroundColor.gradient, for: .widget)
