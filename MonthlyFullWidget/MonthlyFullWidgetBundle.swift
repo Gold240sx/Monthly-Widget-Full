@@ -12,7 +12,6 @@ import SwiftUI
 struct MonthlyFullWidgetBundle: WidgetBundle {
     var body: some Widget {
         MonthlyFullWidget()
-        MonthlyFullWidgetControl()
         MonthlyFullWidgetLiveActivity()
     }
 }

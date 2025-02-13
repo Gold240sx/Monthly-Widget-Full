@@ -1,15 +1,15 @@
 //
-//  MonthlyFullWidgetLiveActivity.swift
-//  MonthlyFullWidget
+//  MontlyFullWidgetLiveActivity.swift
+//  MontlyFullWidget
 //
-//  Created by Michael Martell on 2/13/25.
+//  Created by Michael Martell on 9/8/24.
 //
 
 import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct MonthlyFullWidgetAttributes: ActivityAttributes {
+struct MontlyFullWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var emoji: String
@@ -19,9 +19,9 @@ struct MonthlyFullWidgetAttributes: ActivityAttributes {
     var name: String
 }
 
-struct MonthlyFullWidgetLiveActivity: Widget {
+struct MontlyFullWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: MonthlyFullWidgetAttributes.self) { context in
+        ActivityConfiguration(for: MontlyFullWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
                 Text("Hello \(context.state.emoji)")
@@ -56,25 +56,25 @@ struct MonthlyFullWidgetLiveActivity: Widget {
     }
 }
 
-extension MonthlyFullWidgetAttributes {
-    fileprivate static var preview: MonthlyFullWidgetAttributes {
-        MonthlyFullWidgetAttributes(name: "World")
+extension MontlyFullWidgetAttributes {
+    fileprivate static var preview: MontlyFullWidgetAttributes {
+        MontlyFullWidgetAttributes(name: "World")
     }
 }
 
-extension MonthlyFullWidgetAttributes.ContentState {
-    fileprivate static var smiley: MonthlyFullWidgetAttributes.ContentState {
-        MonthlyFullWidgetAttributes.ContentState(emoji: "😀")
+extension MontlyFullWidgetAttributes.ContentState {
+    fileprivate static var smiley: MontlyFullWidgetAttributes.ContentState {
+        MontlyFullWidgetAttributes.ContentState(emoji: "😀")
      }
      
-     fileprivate static var starEyes: MonthlyFullWidgetAttributes.ContentState {
-         MonthlyFullWidgetAttributes.ContentState(emoji: "🤩")
+     fileprivate static var starEyes: MontlyFullWidgetAttributes.ContentState {
+         MontlyFullWidgetAttributes.ContentState(emoji: "🤩")
      }
 }
 
-#Preview("Notification", as: .content, using: MonthlyFullWidgetAttributes.preview) {
-   MonthlyFullWidgetLiveActivity()
+#Preview("Notification", as: .content, using: MontlyFullWidgetAttributes.preview) {
+   MontlyFullWidgetLiveActivity()
 } contentStates: {
-    MonthlyFullWidgetAttributes.ContentState.smiley
-    MonthlyFullWidgetAttributes.ContentState.starEyes
+    MontlyFullWidgetAttributes.ContentState.smiley
+    MontlyFullWidgetAttributes.ContentState.starEyes
 }
