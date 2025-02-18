@@ -10,7 +10,7 @@ import WidgetKit
 
 struct DayEntry: TimelineEntry {
     let date: Date // always need a date
-//    let configuration: ConfigurationAppIntent
+    let showFunFont: Bool
 }
 
 

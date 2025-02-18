@@ -58,6 +58,13 @@
 			);
 			target = E68CC02C2D5E469C006E0302 /* MonthlyFullWidgetExtension */;
 		};
+		E6C4DE392D6485DB009CDEE4 /* Exceptions for "MonthlyFullWidget" folder in "MonthlyFull" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				MonthlyWidgetIntents.intentdefinition,
+			);
+			target = E68CC00F2D5E45B7006E0302 /* MonthlyFull */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -72,6 +79,7 @@
 		E68CC0332D5E469D006E0302 /* MonthlyFullWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				E6C4DE392D6485DB009CDEE4 /* Exceptions for "MonthlyFullWidget" folder in "MonthlyFull" target */,
 				E68CC0472D5E469F006E0302 /* Exceptions for "MonthlyFullWidget" folder in "MonthlyFullWidgetExtension" target */,
 			);
 			path = MonthlyFullWidget;

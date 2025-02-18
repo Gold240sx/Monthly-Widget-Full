@@ -13,6 +13,7 @@ struct MonthlyFullWidgetEntryView : View {
     @Environment(\.widgetRenderingMode) var renderingMode // changes to UI if nightmode doesn't look quite right.
     var entry: Provider.Entry
     var config: MonthlyConfig
+    let funFontName = "Chalkduster"
     
     init(entry: Provider.Entry) {
         self.entry = entry
@@ -29,7 +30,7 @@ struct MonthlyFullWidgetEntryView : View {
                     .widgetAccentable()
                     // End accent color emoji override
                 Text(entry.date.weekdayDisplayFormat)
-                    .font(.title3)
+                    .font(entry.showFunFont ? .custom(funFontName, size: 24) : .title3)
                     .fontWeight(.semibold)
                     .minimumScaleFactor(0.6)
                     .foregroundStyle(showsBackground ? config.weekdayTextColor : .white)
@@ -41,7 +42,7 @@ struct MonthlyFullWidgetEntryView : View {
             .animation(.bouncy, value: entry.date)
             
             Text(entry.date.dayDisplayFormat)
-                .font(.system(size: 70, weight: .bold))
+                .font(entry.showFunFont ? .custom(funFontName, size: 80) : .system(size: 70, weight: .bold))
                 .foregroundStyle(showsBackground ? config.dayTextColor : .white)
                 .contentTransition(.numericText())
                 .widgetAccentable()

@@ -13,9 +13,9 @@ struct MonthlyFullWidget: Widget {
     let kind: String = "MonthlyFullWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(
+        IntentConfiguration(
             kind: kind,
-            intent: ConfigurationAppIntent.self,
+            intent: ChangeFontIntent.self,
             provider: Provider()
         ){ entry in
             MonthlyFullWidgetEntryView(entry: entry)
@@ -31,9 +31,9 @@ struct MonthlyFullWidget: Widget {
 #Preview("Monthly Widget", as: .systemSmall) {
     MonthlyFullWidget()
 } timeline: {
-    DayEntry(date: MockData.dayOne.date)
-    DayEntry(date: MockData.dayTwo.date)
-    DayEntry(date: MockData.dayThree.date)
-    DayEntry(date: MockData.dayFour.date)
-    DayEntry(date: MockData.dayFive.date)
+    DayEntry(date: MockData.dayOne.date, showFunFont: false)
+    DayEntry(date: MockData.dayTwo.date, showFunFont: true)
+    DayEntry(date: MockData.dayThree.date, showFunFont: false)
+    DayEntry(date: MockData.dayFour.date, showFunFont: true)
+    DayEntry(date: MockData.dayFive.date, showFunFont: false)
 }

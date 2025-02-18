@@ -24,7 +24,7 @@ struct MonthlyFullWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MonthlyFullWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-            let entry = DayEntry(date: context.state.date)
+            let entry = DayEntry(date: context.state.date, showFunFont: false)
             let config = MonthlyConfig.determineConfig(from: context.state.date)
             
             VStack(spacing: 12) {
@@ -55,7 +55,7 @@ struct MonthlyFullWidgetLiveActivity: Widget {
             DynamicIsland {
                 // Expanded UI goes here
                 DynamicIslandExpandedRegion(.leading) {
-                    let entry = DayEntry(date: context.state.date)
+                    let entry = DayEntry(date: context.state.date, showFunFont: false)
                     let config = MonthlyConfig.determineConfig(from: context.state.date)
                     
                     VStack(spacing: 12) {
@@ -78,13 +78,13 @@ struct MonthlyFullWidgetLiveActivity: Widget {
                     .background(config.backgroundColor)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    let entry = DayEntry(date: context.state.date)
+                    let entry = DayEntry(date: context.state.date, showFunFont: false)
                     let config = MonthlyConfig.determineConfig(from: context.state.date)
                     Text(entry.date.dayDisplayFormat)
                         .foregroundColor(config.dayTextColor)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    let entry = DayEntry(date: context.state.date)
+                    let entry = DayEntry(date: context.state.date, showFunFont: false)
                     let config = MonthlyConfig.determineConfig(from: context.state.date)
                     Text(entry.date.weekdayDisplayFormat)
                         .foregroundColor(config.weekdayTextColor)
