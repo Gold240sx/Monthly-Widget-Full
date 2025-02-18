@@ -4,7 +4,7 @@
 <dict>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>ChangeFontIntent</string>
+		<string>com.michaelMartell.MonthlyFull.ChangeFontIntent</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

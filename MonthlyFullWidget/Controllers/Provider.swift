@@ -1,12 +1,24 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: IntentTimelineProvider {
-    func getTimeline(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (Timeline<DayEntry>) -> Void) {
+struct Provider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> DayEntry {
+        DayEntry(
+            date: Date(),
+            showFunFont: false
+        )
+    }
+    
+    func snapshot(for configuration: ChangeFontIntent, in context: Context) async -> DayEntry {
+        let entry = DayEntry(date: Date(), showFunFont: false)
+        return entry
+    }
+    
+    func timeline(for configuration: ChangeFontIntent, in context: Context) async -> Timeline<DayEntry> {
         var entries: [DayEntry] = [] // entries are the data.
         // Timeline is just an array of entries.
         
-        let showFunFont = Bool(configuration.funFont == 1)
+        let showFunFont = configuration.funFont
 
         // Consisting of 7 entries a day apart starting from the currentDay
         let currentDate = Date()
@@ -15,7 +27,7 @@ struct Provider: IntentTimelineProvider {
             let startOfDate = Calendar.current.startOfDay(for: entryDate)
             let entry = DayEntry(
                 date: startOfDate,
-                showFunFont: showFunFont
+                showFunFont: showFunFont!
             )
             entries.append(entry)
         }
@@ -24,18 +36,14 @@ struct Provider: IntentTimelineProvider {
         // After: a specific date
         // Never: only when a user updates data from within your app.
         let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        return timeline
     }
     
-    func getSnapshot(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (DayEntry) -> Void) {
-        let entry = DayEntry(date: Date(), showFunFont: false)
-        completion(entry)
-    }
+//    func getTimeline(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (Timeline<DayEntry>) -> Void) {
+//
+//    }
     
-    func placeholder(in context: Context) -> DayEntry {
-        DayEntry(
-            date: Date(),
-            showFunFont: false
-        )
-    }
+//    func getSnapshot(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (DayEntry) -> Void) {
+//   
+//    }
 } 

@@ -8,16 +8,13 @@
 import WidgetKit
 import SwiftUI
 import ActivityKit
+import AppIntents
 
 struct MonthlyFullWidget: Widget {
     let kind: String = "MonthlyFullWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(
-            kind: kind,
-            intent: ChangeFontIntent.self,
-            provider: Provider()
-        ){ entry in
+        AppIntentConfiguration(kind: kind, intent: ChangeFontIntent.self, provider: Provider()){ entry in
             MonthlyFullWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Monthly Style Widget")
@@ -26,6 +23,14 @@ struct MonthlyFullWidget: Widget {
         // if you only want it to show lockscreen or homescreen use the following:
         // .disfavoredLocations([.lockScreen / .standby], for: [.systemSmall])
     }
+}
+
+struct ChangeFontIntent: AppIntent, WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "Fun Font"
+    static var description: IntentDescription = .init(stringLiteral: "Switch to a fun font")
+    
+    @Parameter(title: "Fun Font", default: false)
+    var funFont: Bool?
 }
 
 #Preview("Monthly Widget", as: .systemSmall) {
